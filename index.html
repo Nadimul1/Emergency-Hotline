@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>জরুরি সেবা নির্দেশিকা | Emergency Hotline</title>
+  <style>
+    :root{
+      --brand: #0a7a3a;
+      --brand-dark:#075e2c;
+      --brand-grad-start:#0aa64f;
+      --brand-grad-end:#0b5130;
+      --bg:#eef7f0;
+      --card:#ffffff;
+      --text:#0d1b1e;
+      --muted:#5f6b6f;
+      --ring:#dbe8de;
+      --success:#17a34a;
+      --danger:#d43c2e;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,"Noto Sans", "Apple Color Emoji","Segoe UI Emoji";}
+    a{color:inherit}
+    .container{max-width:1200px;margin:0 auto;padding:16px}
+
+    /* Navbar */
+    .nav{background:#fff; border-bottom:1px solid var(--ring); position:sticky; top:0; z-index:50;}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .logo{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4141,#ffd95c);color:#fff;font-size:18px}
+    .counters{display:flex; align-items:center; gap:10px}
+    .pill{display:flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--ring); padding:6px 10px; border-radius:999px; font-weight:600}
+    .pill .dot{width:18px;height:18px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--ring);}
+
+    /* Hero */
+    .hero{margin-top:16px; border-radius:16px; overflow:hidden;}
+    .hero-inner{background:linear-gradient(135deg,var(--brand-grad-start),var(--brand-grad-end)); color:#fff; padding:36px 16px; text-align:center; position:relative}
+    .crest{width:72px;height:72px;border-radius:999px;background:#fff; display:grid; place-items:center; color:var(--brand-dark); font-size:34px; margin:0 auto 10px auto; box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .title{font-size:28px; font-weight:800; margin:8px 0}
+    .subtitle{opacity:.9}
+
+    /* Main layout */
+    .main{display:grid; grid-template-columns: 1fr 320px; gap:16px; margin-top:16px}
+    @media (max-width: 900px){ .main{ grid-template-columns: 1fr; } }
+
+    /* Cards grid */
+    .grid{display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px}
+    @media (max-width: 1100px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{background:var(--card); border:1px solid var(--ring); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:10px; box-shadow:0 6px 16px rgba(0,0,0,.06)}
+    .card-top{display:flex; align-items:center; justify-content:space-between}
+    .left{display:flex; align-items:center; gap:10px}
+    .icon{width:38px;height:38px;border-radius:10px;background:#ffeef0;display:grid;place-items:center;font-size:20px}
+    .heart-btn{border:none;background:#fff;border:1px solid var(--ring); width:34px;height:34px;border-radius:999px; cursor:pointer}
+    .heart-btn:hover{transform:translateY(-1px)}
+
+    .names{display:flex; flex-direction:column; gap:2px}
+    .bn{font-weight:700}
+    .en{font-size:12px;color:var(--muted)}
+
+    .number{font-size:28px; font-weight:800; letter-spacing:.5px}
+
+    .badge{align-self:flex-start; background:#f1faf3; color:var(--brand-dark); border:1px solid #cfe9d7; padding:4px 8px; border-radius:999px; font-size:12px}
+
+    .actions{display:flex; gap:10px; margin-top:auto}
+    .btn{flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border-radius:10px; padding:10px 12px; font-weight:700; cursor:pointer; border:1px solid var(--ring); background:#fff}
+
+    .btn-call{background:var(--success); color:#fff; border-color:transparent}
+    .btn-call:active{transform:translateY(1px)}
+
+    /* History */
+    .history{background:#fff; border:1px solid var(--ring); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:10px}
+    .history-top{display:flex; align-items:center; justify-content:space-between}
+    .history-title{display:flex; align-items:center; gap:8px; font-weight:800}
+    .clear-btn{border:none;background:#fff;border:1px solid var(--ring); padding:8px 12px;border-radius:999px; cursor:pointer}
+    .clear-btn:hover{background:#fafafa}
+
+    .items{display:flex; flex-direction:column; gap:8px; max-height:560px; overflow:auto}
+    .item{display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center; background:#fbfdfc; border:1px solid var(--ring); padding:10px 12px; border-radius:10px}
+    .item .name{font-weight:700}
+    .item .meta{display:flex; align-items:center; gap:10px; color:var(--muted); font-size:12px}
+
+    .sr-only{position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo"><img class="logo" src="logo.png" alt=""></div>
+        <div>
+          <div>Emergency <span style="color:var(--brand)">Service</span></div>
+        </div>
+      </div>
+      <div class="counters">
+        <div class="pill" title="Favorites">
+          <div class="dot"><img class="dot"src="heart.png" alt=""></div><span id="heartCount">0</span>
+        </div>
+        <div class="pill" title="Coins">
+          <div class="dot"><img class="dot" src="coin.png" alt=""></div><span id="coinCount">100</span>
+        </div>
+        <div class="pill" title="Copies">
+          <div class="dot">📋</div><span id="copyCount">0</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="container hero">
+    <div class="hero-inner">
+      <div class="crest"><img class="crest" src="logo.png" alt=""></div>
+      <div class="title">জরুরি সেবা নির্দেশিকা</div>
+      <div class="subtitle">Government Emergency Services at Your Fingertips – A Project by Government of the People's Republic of Bangladesh</div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="container main">
+    <!-- Cards -->
+    <section>
+      <div id="cards" class="grid" aria-live="polite"></div>
+    </section>
+
+    <!-- History -->
+    <aside class="history">
+      <div class="history-top">
+        <div class="history-title">📞 <span>Call History</span></div>
+        <button id="clearHistory" class="clear-btn">Clear</button>
+      </div>
+      <div id="historyEmpty" class="item" style="display:none;opacity:.8">
+        <div>No history yet</div>
+        <div class="meta">—</div>
+      </div>
+      <div id="history" class="items"></div>
+    </aside>
+  </main>
+
+  <template id="card-tpl">
+    <article class="card">
+      <div class="card-top">
+        <div class="left">
+          <div class="icon">🚑</div>
+          <div class="names">
+            <div class="bn">সেবার নাম</div>
+            <div class="en">Service Name</div>
+          </div>
+        </div>
+        <button class="heart-btn" aria-label="Add to favorites">💗</button>
+      </div>
+      <div class="number">000</div>
+      <span class="badge">বিভাগ</span>
+      <div class="actions">
+        <button class="btn btn-copy">📋 Copy</button>
+        <button class="btn btn-call">📞 Call</button>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    // ====== DATA ======
+    
+    const SERVICES = [
+      { id: 'national', icon:'🚨', bn:'জাতীয় জরুরি সেবা', en:'National Emergency', number:'999', category:'সরকারি' },
+      { id: 'police', icon:'👮‍♂️', bn:'পুলিশ', en:'Police', number:'999', category:'পুলিশ' },
+      { id: 'fire', icon:'🚒', bn:'ফায়ার সার্ভিস', en:'Fire Service', number:'999', category:'দমকল' },
+      { id: 'ambulance', icon:'🚑', bn:'অ্যাম্বুলেন্স', en:'Ambulance', number:'1994-999999', category:'জরুরি' },
+      { id: 'womenChild', icon:'👩‍👧', bn:'নারী ও শিশু সহায়তা', en:'Women & Child Helpline', number:'109', category:'সহায়তা' },
+      { id: 'antiCorruption', icon:'🛡️', bn:'দুদক', en:'Anti-Corruption', number:'106', category:'সরকারি' },
+      { id: 'electricity', icon:'💡', bn:'বিদ্যুৎ বিঘ্নিত', en:'Electricity Outage', number:'16216', category:'বিদ্যুৎ' },
+      { id: 'brac', icon:'🏥', bn:'ব্র্যাক', en:'Brac', number:'16445', category:'এনজিও' },
+      { id: 'railway', icon:'🚆', bn:'বাংলাদেশ রেলওয়ে', en:'Bangladesh Railway', number:'163', category:'পরিবহন' },
+    ];
+
+    // ====== STATE ======
+    let coins = 100;
+    let heartCount = 0;
+    let copyCount = 0;
+
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    const heartEl = document.getElementById('heartCount');
+    const coinEl = document.getElementById('coinCount');
+    const copyEl = document.getElementById('copyCount');
+    const cardsEl = document.getElementById('cards');
+    const historyEl = document.getElementById('history');
+    const historyEmptyEl = document.getElementById('historyEmpty');
+
+    function updateCounters(){
+      heartEl.textContent = heartCount;
+      coinEl.textContent = coins;
+      copyEl.textContent = copyCount;
+    }
+
+    // ====== RENDER CARDS ======
+    function renderCards(){
+      const tpl = document.getElementById('card-tpl');
+      SERVICES.forEach(svc => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        node.dataset.id = svc.id;
+        $('.icon', node).textContent = svc.icon;
+        $('.bn', node).textContent = svc.bn;
+        $('.en', node).textContent = svc.en;
+        $('.number', node).textContent = svc.number;
+        $('.badge', node).textContent = svc.category;
+
+        // Heart
+        $('.heart-btn', node).addEventListener('click', () => {
+          heartCount++;
+          updateCounters();
+        });
+
+        // Copy
+        $('.btn-copy', node).addEventListener('click', async () => {
+          try{
+            await navigator.clipboard.writeText(svc.number);
+            alert(`Copied ${svc.en} number: ${svc.number}`);
+            copyCount++;
+            updateCounters();
+          }catch(err){
+            // Fallback for older browsers
+            const ok = window.prompt('Press Ctrl/Cmd+C then Enter to copy:', svc.number);
+            copyCount++;
+            updateCounters();
+          }
+        });
+
+        // Call
+        $('.btn-call', node).addEventListener('click', () => handleCall(svc));
+
+        cardsEl.appendChild(node);
+      });
+    }
+
+    // ====== CALL LOGIC ======
+    function handleCall(svc){
+      if (coins < 20){
+        alert('Not enough coins. Each call costs 20 coins.');
+        return;
+      }
+      // Deduct coins first
+      coins -= 20;
+      updateCounters();
+
+      alert(`Calling ${svc.en} ( ${svc.number} )`);
+      addHistoryItem(svc);
+    }
+
+    function addHistoryItem(svc){
+      const item = document.createElement('div');
+      item.className = 'item';
+      const left = document.createElement('div');
+      const right = document.createElement('div');
+
+      const time = new Date();
+      const timeStr = time.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+
+      left.innerHTML = `<div class="name">${svc.bn}</div><div class="meta">${svc.en} • ${svc.number}</div>`;
+      right.innerHTML = `<div class="meta">${timeStr}</div>`;
+
+      item.appendChild(left);
+      item.appendChild(right);
+
+      historyEl.prepend(item);
+      historyEmptyEl.style.display = 'none';
+    }
+
+    // Clear history
+    document.getElementById('clearHistory').addEventListener('click', () => {
+      historyEl.innerHTML = '';
+      historyEmptyEl.style.display = 'grid';
+    });
+
+    // Boot
+    renderCards();
+    updateCounters();
+  </script>
+</body>
+</html>
